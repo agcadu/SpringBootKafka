@@ -12,6 +12,6 @@ public class KafkaConsumerListener {
 
     @KafkaListener(topics = "test-topic", groupId = "group-test")
     public void listener(String message) {
-        LOGGER.info("Received Messasge in group group-test: " + message);
+        LOGGER.info("Received Message in group group-test: " + message);
     }
 }
