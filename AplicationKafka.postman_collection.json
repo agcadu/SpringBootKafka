@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "77b91cb4-03ed-45b7-93a4-1a5dd262e55f",
+		"name": "AplicationKafka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24393158",
+		"_collection_link": "https://lunar-crater-546608.postman.co/workspace/Team-Workspace~09b7adc2-4999-4880-8509-cbaed4e92cc0/collection/24393158-77b91cb4-03ed-45b7-93a4-1a5dd262e55f?action=share&source=collection_link&creator=24393158"
+	},
+	"item": [
+		{
+			"name": "Mensaje al Productor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/person?name=Maria&lastName=Garcia&age=24&email=Mariagar@gmail.com&phone=678258412",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"person"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maria"
+						},
+						{
+							"key": "lastName",
+							"value": "Garcia"
+						},
+						{
+							"key": "age",
+							"value": "24"
+						},
+						{
+							"key": "email",
+							"value": "Mariagar@gmail.com"
+						},
+						{
+							"key": "phone",
+							"value": "678258412"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

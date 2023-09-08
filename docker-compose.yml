@@ -19,9 +19,41 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-broker-1:9092,PLAINTEXT_INTERNAL://broker:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     ports:
       - "9092:9092"
+
+  springboot_provider:
+    container_name: springboot_provider
+    image: springboot_provider
+    build:
+      context: ./SpringBootProvider
+    ports:
+      - 8080:8080
+
+  springboot_consumer:
+    container_name: springboot_consumer
+    image: springboot_consumer
+    build:
+      context: ./SpringBootConsumer
+    ports:
+      - 8081:8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres_db:5432/postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - postgres_db
+
+  postgres_db:
+    container_name: postgres_db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=spring_graphql
