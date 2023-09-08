@@ -3,6 +3,7 @@ package com.kafka.provider.controller;
 import com.kafka.provider.model.Person;
 import com.kafka.provider.response.PersonResponseRest;
 import com.kafka.provider.service.IPersonService;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class PersonController {
     public ResponseEntity<PersonResponseRest> sendMessage(
             @RequestParam("name") String name,
             @RequestParam("lastName") String lastName,
-            @RequestParam("age") int age,
+            @RequestParam("age") String age,
             @RequestParam("email") String email,
             @RequestParam("phone") String phone
     ) {
@@ -36,10 +37,11 @@ public class PersonController {
         person.setAge(age);
         person.setEmail(email);
         person.setPhone(phone);
+        ProducerRecord<String, Person> personRecord = new ProducerRecord<>("test-topic", person);
 
-        ResponseEntity<PersonResponseRest> response = personService.sendMessage(person);
+        ResponseEntity<PersonResponseRest> response = personService.sendMessage(personRecord);
 
-        LOGGER.info("PersonController.sendMessage response: {}", response + " " + person.toString());
+        LOGGER.info("PersonController.sendMessage response: {}", response + " " + person);
 
 
 

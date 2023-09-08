@@ -26,6 +26,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.kafka.provider</groupId>
+			<artifactId>SpringBootProvider</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>
